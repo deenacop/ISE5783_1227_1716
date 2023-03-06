@@ -47,11 +47,32 @@ public class Vector extends Point {
     }
 
     public double dotProduct(Vector vector) {
-        return (length());
+        double dx = xyz.d1;
+        double dy = xyz.d2;
+        double dz = xyz.d3;
+
+        double vx = vector.xyz.d1;
+        double vy = vector.xyz.d2;
+        double vz = vector.xyz.d3;
+
+        return (dx * vx + dy * vy + dz * vz);
     }
 
-    public Vector crossProduct(Vector v2) {
-        return new Vector(1,1,1);//מכפלה וקטורית
+    public Vector crossProduct(Vector vector) {
+        double dx = xyz.d1;
+        double dy = xyz.d2;
+        double dz = xyz.d3;
+
+        double vx = vector.xyz.d1;
+        double vy = vector.xyz.d2;
+        double vz = vector.xyz.d3;
+
+        return new Vector(new Double3(
+                dy * vz - dz * vy,
+                dz * vx - dx * vz,
+                dx * vy - dy * vx
+        ));
+
     }
 
     public Vector normalize() {
