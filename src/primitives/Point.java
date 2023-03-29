@@ -82,9 +82,15 @@ public class Point {
      */
     public double distanceSquared(Point other)
     {
-        return (other.xyz.d1 - xyz.d1)*(other.xyz.d1 - xyz.d1)+
-                (other.xyz.d2 - xyz.d2)*(other.xyz.d2 - xyz.d2)+
-                (other.xyz.d3 - xyz.d3)*(other.xyz.d3 - xyz.d3);
+        double x1 = xyz.d1;
+        double y1 = xyz.d2;
+        double z1 = xyz.d3;
+
+        double x2 = other.xyz.d1;
+        double y2 = other.xyz.d2;
+        double z2 = other.xyz.d3;
+
+        return ((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1) + (z2 - z1) * (z2 - z1));
     }
 
     /**

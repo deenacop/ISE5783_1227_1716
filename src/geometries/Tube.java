@@ -24,6 +24,10 @@ public class Tube extends RadialGeometry {
         this.axisRay = axisRay;
     }
 
+    public Ray getAxisRay() {
+        return axisRay;
+    }
+
     /**
      * Returns the normal vector to the tube at a given point on its surface.
      * Since a tube can have an infinite number of normal vectors at any given point,
@@ -34,6 +38,14 @@ public class Tube extends RadialGeometry {
      */
     @Override
     public Vector getNormal(Point point) {
-        return null;
+        Vector P0_point = point.subtract(axisRay.getP0());
+        Vector v = axisRay.getDir();
+
+        double t = v.dotProduct(P0_point);  // finding scaler for the projection of point on axisRay
+
+        Point O = axisRay.getPoint(t);   // O is the projection of point on axisRay
+
+        Vector N=point.subtract(O);
+        return N.normalize();
     }
 }

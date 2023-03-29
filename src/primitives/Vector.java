@@ -34,7 +34,10 @@ public class Vector extends Point {
      * @param xyz the Double3 object containing the x, y, and z components of the vector.
      */
     public Vector(Double3 xyz) {
-        this(xyz.d1, xyz.d2, xyz.d3);
+        super(xyz.d1, xyz.d2, xyz.d3);
+        if (xyz.equals(Double3.ZERO)) {
+            throw new IllegalArgumentException("Vector zero");
+        }
     }
 
     /**
@@ -58,6 +61,15 @@ public class Vector extends Point {
     @Override
     public String toString() {
         return "Vector:" + xyz;
+    }
+
+    /**
+     * subtract between this vector and another one
+     * @param other  the second vector
+     * @return new vector from this vector to the other vector
+     */
+    public Vector subtract(Vector other) {
+        return new Vector(xyz.subtract(other.xyz));
     }
 
     /**
@@ -108,15 +120,9 @@ public class Vector extends Point {
      * @return The dot product of this vector with the specified vector.
      */
     public double dotProduct(Vector vector) {
-        double dx = xyz.d1;
-        double dy = xyz.d2;
-        double dz = xyz.d3;
-
-        double vx = vector.xyz.d1;
-        double vy = vector.xyz.d2;
-        double vz = vector.xyz.d3;
-
-        return (dx * vx + dy * vy + dz * vz);
+        return vector.xyz.d1 * xyz.d1 +
+                vector.xyz.d2 * xyz.d2 +
+                vector.xyz.d3 * xyz.d3;
     }
 
     /**
@@ -151,6 +157,7 @@ public class Vector extends Point {
      @return the normalized version of this vector
      */
     public Vector normalize() {
+        //TODO: to check later maybe replace
         return new Vector(xyz.reduce(length()));
     }
 }

@@ -2,6 +2,9 @@ package primitives;
 
 import java.util.Objects;
 
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
+
 /**
 
  Ray class represents a ray in Cartesian 3D coordinate system, composed of a starting point and a direction vector.
@@ -24,6 +27,8 @@ public class Ray {
         this.p0 = p0;
         this.dir = dir.normalize();
     }
+
+
     /**
 
      Returns the starting point of the ray.
@@ -60,5 +65,12 @@ public class Ray {
     @Override
     public String toString() {
         return "Ray:" + p0 + ", " + dir;
+    }
+
+    public Point getPoint(double delta) {
+        if (isZero(delta)) {
+            return p0;
+        }
+        return p0.add(dir.scale(delta));
     }
 }
