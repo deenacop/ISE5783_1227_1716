@@ -10,23 +10,24 @@ class VectorTest {
      * Test method for {@link Vector Add}
      */
     @org.junit.jupiter.api.Test
-public void testAdd() {
+    public void testAdd() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Simple test
-        Vector v1 = new Vector(1,2,3);
-        Vector v2 = new Vector(1,0,0);
-        assertEquals(new Vector(2,2,3),v1.add(v2));
+        Vector v1 = new Vector(1, 2, 3);
+        Vector v2 = new Vector(1, 0, 0);
+        assertEquals(new Vector(2, 2, 3), v1.add(v2));
         // =============== Boundary Values Tests ==================
         // TC11: test adding v + (-v)
         assertThrows(IllegalArgumentException.class,
-                ()->v1.add(new Vector(-1, -2, -3)),
+                () -> v1.add(new Vector(-1, -2, -3)),
                 "ERROR: zero vector does not throw an exception");
-        }
+    }
+
     /**
      * Test method for {@link Vector Subtract}
      */
     @org.junit.jupiter.api.Test
-public void testSubtract() {
+    public void testSubtract() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Simple test
         assertEquals(new Vector(1, 1, 1),
@@ -35,63 +36,63 @@ public void testSubtract() {
 
         // =============== Boundary Values Tests ==================
         // TC11: test subtracting same vector
-        assertThrows( IllegalArgumentException.class,
-        () -> new Vector(1, 2, 3).subtract(new Vector(1, 2, 3)),
+        assertThrows(IllegalArgumentException.class,
+                () -> new Vector(1, 2, 3).subtract(new Vector(1, 2, 3)),
                 "Subtract v from v must throw exception");
-        }
+    }
 
 
     /**
      * Test method for {@link Vector PointSubtrac}
      */
     @org.junit.jupiter.api.Test
-public void testPointSubtract() {
+    public void testPointSubtract() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Simple test
-        assertEquals( new Vector(1, 1, 1), new Point(2, 3, 4).subtract(new Point(1, 2, 3))
-        ,"Wrong point subtract");
+        assertEquals(new Vector(1, 1, 1), new Point(2, 3, 4).subtract(new Point(1, 2, 3))
+                , "Wrong point subtract");
 
         // =============== Boundary Values Tests ==================
         // TC11: test subtracting same point
-        assertThrows( IllegalArgumentException.class,
-        () -> new Point(1, 2, 3).subtract(new Point(1, 2, 3)),
+        assertThrows(IllegalArgumentException.class,
+                () -> new Point(1, 2, 3).subtract(new Point(1, 2, 3)),
                 "Subtract P from P must throw exception");
-        }
+    }
 
     /**
      * Test method for {@link Vector Scale}
      */
     @org.junit.jupiter.api.Test
-public void testScale() {
+    public void testScale() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Simple test
         assertEquals(new Vector(2, 4, 6), new Vector(1, 2, 3).scale(2)
-        ,"Wrong vector scale");
+                , "Wrong vector scale");
 
         // =============== Boundary Values Tests ==================
         // TC11: test adding v + (-v)
-        assertThrows( IllegalArgumentException.class,
-        () -> new Vector(1, 2, 3).scale(0d)
-        ,"Scale by 0 must throw exception");
-        }
+        assertThrows(IllegalArgumentException.class,
+                () -> new Vector(1, 2, 3).scale(0d)
+                , "Scale by 0 must throw exception");
+    }
 
     /**
      * Test method for {@link Vector DotProduct}
      */
     @org.junit.jupiter.api.Test
-public void testDotProduct() {
+    public void testDotProduct() {
         Vector v1 = new Vector(1, 2, 3);
 
         // ============ Equivalence Partitions Tests ==============
         // TC01: Simple dotProduct test
         Vector v2 = new Vector(-2, -4, -6);
-        assertEquals(-28d, v1.dotProduct(v2), 0.00001,"dotProduct() wrong value");
+        assertEquals(-28d, v1.dotProduct(v2), 0.00001, "dotProduct() wrong value");
 
         // =============== Boundary Values Tests ==================
         // TC11: dotProduct for orthogonal vectors
         Vector v3 = new Vector(0, 3, -2);
-        assertEquals(0d, v1.dotProduct(v3), 0.00001,"dotProduct() for orthogonal vectors is not zero");
-        }
+        assertEquals(0d, v1.dotProduct(v3), 0.00001, "dotProduct() for orthogonal vectors is not zero");
+    }
 
 
     /**
@@ -135,10 +136,9 @@ public void testDotProduct() {
     @org.junit.jupiter.api.Test
     public void testLength() {
         // TC01: Simple test
-        assertEquals( 5d, new Vector(0, 3, 4).length(), 0.00001,
+        assertEquals(5d, new Vector(0, 3, 4).length(), 0.00001,
                 "length() wrong value");
     }
-
 
 
     /**
@@ -150,10 +150,12 @@ public void testDotProduct() {
         Vector u = v.normalize();
         // =============== Boundary Values Tests ==================
         assertTrue(isZero(u.length() - 1), "ERROR: the normalized vector is not a unit vector");
-        assertThrows( IllegalArgumentException.class,
-                () -> {v.crossProduct(u);},
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    v.crossProduct(u);
+                },
                 "ERROR: the normalized vector is not parallel to the original one"); // test that the vectors are co-lined
-        assertTrue(v.dotProduct(u) >= 0,"ERROR: the normalized vector is opposite to the original one");
+        assertTrue(v.dotProduct(u) >= 0, "ERROR: the normalized vector is opposite to the original one");
     }
 
 }

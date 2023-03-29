@@ -12,17 +12,19 @@ import static primitives.Util.isZero;
  */
 public class Cylinder extends Tube {
 
-    /** The height of the cylinder */
+    /**
+     * The height of the cylinder
+     */
     final double height;
 
     /**
      * Constructs a cylinder with a given height, axis ray, and radius.
      *
-     * @param height The height of the cylinder
+     * @param height  The height of the cylinder
      * @param axisRay The axis ray of the cylinder
-     * @param radius The radius of the cylinder
+     * @param radius  The radius of the cylinder
      */
-    public Cylinder(Ray axisRay ,double height,  double radius) {
+    public Cylinder(Ray axisRay, double height, double radius) {
         super(axisRay, radius);
         this.height = height;
     }

@@ -9,10 +9,14 @@ import primitives.Vector;
  */
 public class Plane implements Geometry {
 
-    /** A point on the plane */
+    /**
+     * A point on the plane
+     */
     final Point q0;
 
-    /** The normal vector to the plane */
+    /**
+     * The normal vector to the plane
+     */
     final Vector normal;
 
     /**
@@ -24,7 +28,7 @@ public class Plane implements Geometry {
      * @param v2 A point on the plane
      * @param v3 A point on the plane
      */
-    public Plane(Point v1, Point v2, Point v3){
+    public Plane(Point v1, Point v2, Point v3) {
         q0 = v1;
         Vector U = v3.subtract(v1);
         Vector V = v2.subtract(v1);
@@ -34,7 +38,7 @@ public class Plane implements Geometry {
     /**
      * Constructs a plane with a given point on the plane and normal vector to the plane.
      *
-     * @param p0 A point on the plane
+     * @param p0     A point on the plane
      * @param vector The normal vector to the plane
      */
     public Plane(Point p0, Vector vector) {

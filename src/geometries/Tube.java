@@ -10,14 +10,16 @@ import primitives.Vector;
  */
 public class Tube extends RadialGeometry {
 
-    /** The axis ray of the tube */
+    /**
+     * The axis ray of the tube
+     */
     final Ray axisRay;
 
     /**
      * Constructs a tube with a given axis ray and radius.
      *
      * @param axisRay The axis ray of the tube
-     * @param radius The radius of the tube
+     * @param radius  The radius of the tube
      */
     public Tube(Ray axisRay, double radius) {
         super(radius);
@@ -45,7 +47,7 @@ public class Tube extends RadialGeometry {
 
         Point O = axisRay.getPoint(t);   // O is the projection of point on axisRay
 
-        Vector N=point.subtract(O);
+        Vector N = point.subtract(O);
         return N.normalize();
     }
 }
