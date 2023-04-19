@@ -73,4 +73,8 @@ public class Ray {
         }
         return p0.add(dir.scale(delta));
     }
+
+    public Point getPoint() {
+        return p0;
+    }
 }

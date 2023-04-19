@@ -112,4 +112,14 @@ public class Point {
     public Point add(Vector vector) {
         return new Point(xyz.add(vector.xyz));
     }
+
+    public double getX() {
+        return xyz.d1;
+    }
+
+    public double getY() {
+        return xyz.d2;
+    }
+
+    public double getZ() {return xyz.d3;}
 }
