@@ -84,9 +84,56 @@ public class Polygon implements Geometry {
    public Vector getNormal(Point point) { return plane.getNormal(); }
 
 
+   /**
+
+   * Finds the intersection points between a given ray and this polygon. Uses the plane
+   * containing the polygon to find the initial intersection point, and then checks whether
+   * this point lies inside the polygon's boundaries by performing cross products of the
+   * ray's direction vector with vectors connecting the ray's origin to the polygon's vertices.
+   * @param ray the ray to intersect with the polygo
+   * @return a list of intersection points, or null if the ray doesn't intersect with the polygon
+    */
    @Override
    public List<Point> findIntersections(Ray ray) {
-      return null;
+      List<Point> result = plane.findIntersections(ray);
+
+      if (result == null) {
+         return result;
+      }
+
+      Point P0 = ray.getPoint();
+      Vector v = ray.getDir();
+
+      Point P1 = vertices.get(1);
+      Point P2 = vertices.get(0);
+
+      Vector v1 = P1.subtract(P0);
+      Vector v2 = P2.subtract(P0);
+
+      double sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
+
+      if (isZero(sign)) {
+         return null;
+      }
+
+      boolean positive = sign > 0;
+
+      //iterate through all vertices of the polygon
+      for (int i = vertices.size() - 1; i > 0; --i) {
+         v1 = v2;
+         v2 = vertices.get(i).subtract(P0);
+
+         sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
+         if (isZero(sign)) {
+            return null;
+         }
+
+         if (positive != (sign > 0)) {
+            return null;
+         }
+      }
+
+      return result;
    }
 
 }
