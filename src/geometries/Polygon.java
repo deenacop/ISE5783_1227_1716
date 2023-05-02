@@ -101,7 +101,7 @@ public class Polygon implements Geometry {
          return result;
       }
 
-      Point P0 = ray.getPoint();
+      Point P0 = ray.getP0();
       Vector v = ray.getDir();
 
       Point P1 = vertices.get(1);

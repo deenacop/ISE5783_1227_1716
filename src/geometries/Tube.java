@@ -68,7 +68,7 @@ public class Tube extends RadialGeometry {
     public List<Point> findIntersections(Ray ray) {
         Vector vAxis = axisRay.getDir();
         Vector v = ray.getDir();
-        Point p0 = ray.getPoint();
+        Point p0 = ray.getP0();
 
         // At^2+Bt+C=0
         double a = 0;
@@ -93,7 +93,7 @@ public class Tube extends RadialGeometry {
 
         Vector deltaP = null;
         try {
-            deltaP = p0.subtract(axisRay.getPoint());
+            deltaP = p0.subtract(axisRay.getP0());
         } catch (IllegalArgumentException e1) { // the ray begins at axis P0
             if (vVa == 0) // the ray is orthogonal to Axis
                 return List.of(ray.getPoint(radius));
