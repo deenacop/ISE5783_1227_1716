@@ -7,6 +7,8 @@ import java.util.Objects;
  * @author Chani Olshtein and Deena Glecer
  */
 public class Point {
+
+    public static final Point ZERO = new Point(0,0,0);
     final Double3 xyz;
 
     /**

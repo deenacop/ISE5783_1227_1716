@@ -1,5 +1,6 @@
 package primitives;
 
+import java.util.List;
 import java.util.Objects;
 
 import static primitives.Util.alignZero;
@@ -72,5 +73,28 @@ public class Ray {
             return p0;
         }
         return p0.add(dir.scale(delta));
+    }
+
+    /**
+     * Finds the closet Point that is intersected
+     *
+     * @param pointList the list of points in which to find the closest one
+     * @return the closest point
+     */
+    public Point findClosestPoint(List<Point> pointList) {
+        if (pointList == null)
+            return null;
+
+        Point result = null;
+        double distance = Double.MAX_VALUE;
+        double d;
+        for (var pt : pointList) {
+            d = pt.distance(p0);
+            if (d < distance) {
+                distance = d;
+                result = pt;
+            }
+        }
+        return result;
     }
 }
