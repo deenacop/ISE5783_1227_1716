@@ -20,7 +20,7 @@ public class Camera {
     private double width;       // ViewPlane width
     private double height;      // ViewPlane height
     private ImageWriter imageWriter;  // Field for image writer
-    private RayTracerBase rayTracerBase;  // Field for ray tracer
+    private RayTracerBase rayTracer;  // Field for ray tracer
 
     /**
      * @param p0  origin  point in 3D space
@@ -140,11 +140,11 @@ public class Camera {
      * Setter of builder patterns
      * set ray tracer
      *
-     * @param rayTracerBasic parameter for rayTracerBasic
+     * @param rayTracer parameter for rayTracerBasic
      * @return Camera object
      */
-    public Camera setRayTracer(RayTracerBasic rayTracerBasic) {
-        this.rayTracerBase = rayTracerBasic;
+    public Camera setRayTracer(RayTracerBase rayTracer) {
+        this.rayTracer = rayTracer;
         return this;
     }
 
@@ -158,7 +158,7 @@ public class Camera {
             if (imageWriter == null) {
                 throw new MissingResourceException("missing resource", ImageWriter.class.getName(), "");
             }
-            if (rayTracerBase == null) {
+            if (rayTracer == null) {
                 throw new MissingResourceException("missing resource", RayTracerBase.class.getName(), "");
             }
 
@@ -168,10 +168,7 @@ public class Camera {
             //go over all the pixels
             for (int i = 0; i < nX; i++) {
                 for (int j = 0; j < nY; j++) {
-                    // construct a ray through the current pixel
-                    Ray ray = this.constructRay(nX, nY, j, i);
-                    // get the  color of the point from trace ray
-                    Color color = rayTracerBase.traceRay(ray);
+                    Color color = castRay(nX, nY, i, j);
                     // write the pixel color to the image
                     imageWriter.writePixel(j, i, color);
                 }
@@ -180,6 +177,15 @@ public class Camera {
             throw new UnsupportedOperationException("Not implemented yet" + e.getClassName());
         }
     }
+
+    private Color castRay(int nX, int nY, int i, int j) {
+        // construct a ray through the current pixel
+        Ray ray = this.constructRay(nX, nY, j, i);
+        // get the  color of the point from trace ray
+        Color color = rayTracer.traceRay(ray);
+        return color;
+    }
+
 
     /**
      * function that create the grid
@@ -190,8 +196,11 @@ public class Camera {
     public void printGrid(int interval, Color color) {
         if (imageWriter == null)
             throw new MissingResourceException("missing imageawriter", "Camera", "in print Grid");
-        for (int j = 0; j < imageWriter.getNx(); j++) {
-            for (int i = 0; i < imageWriter.getNy(); i++) {
+
+        int Nx = imageWriter.getNx();
+        int Ny = imageWriter.getNy();
+        for (int j = 0; j < Nx; j++) {
+            for (int i = 0; i < Ny; i++) {
                 //grid 16 X 10
                 if (j % interval == 0 || i % interval == 0) {
                     imageWriter.writePixel(j, i, color);
@@ -212,4 +221,6 @@ public class Camera {
 
         imageWriter.writeToImage();
     }
+
+
 }

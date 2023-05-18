@@ -13,7 +13,7 @@ import static primitives.Util.isZero;
  * Plane class represents a 3D plane in Cartesian 3D coordinate system
  * implementing the Geometry interface.
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
 
     /**
      * A point on the plane
@@ -82,10 +82,10 @@ public class Plane implements Geometry {
      *         or null if no intersection exists
      */
     @Override
-    public List<Point> findIntersections(Ray ray)
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray)
     {
         // look at powerpoint 4 how to make the function(Ray Plane intersection))
-        Point P0=ray.getP0();
+        Point P0 = ray.getP0();
         Vector v=ray.getDir();
         Vector n=normal;
 
@@ -95,12 +95,12 @@ public class Plane implements Geometry {
         if (isZero(nv))
             return null;
 
-        Vector P0_Q= q0.subtract(P0);
+        Vector P0_Q = q0.subtract(P0);
         double t = alignZero( n.dotProduct(P0_Q)/nv);
         // if t<0 thn the ray is not in the right direction
         //if t==0 the ray origin alay on the
         if(t > 0 ) {
-            Point P = ray.getPoint(t);
+            GeoPoint P = new GeoPoint(this, P0.add(v.scale(t))); //new GeoPoint{geometry=this, point=p0+tv}
             return List.of(P);
         }
         return null ;

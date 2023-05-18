@@ -65,25 +65,25 @@ public class Tube extends RadialGeometry {
      @return A list of intersection points between the ray and the tube, or null if there are no intersections
      */
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        Vector vAxis = axisRay.getDir();
-        Vector v = ray.getDir();
-        Point p0 = ray.getP0();
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        Vector vAxis = axisRay.getDir(); //direction of the axis ray
+        Vector v = ray.getDir(); //direction of ray
+        Point p0 = ray.getP0(); //point of ray
 
         // At^2+Bt+C=0
         double a = 0;
         double b = 0;
         double c = 0;
 
-        double vVa = alignZero(v.dotProduct(vAxis));
+        double vVa = alignZero(v.dotProduct(vAxis)); //vVa=v*vAxis
         Vector vVaVa;
         Vector vMinusVVaVa;
-        if (vVa == 0) // the ray is orthogonal to the axis
+        if (vVa == 0) { // the ray is orthogonal to the axis
             vMinusVVaVa = v;
-        else {
-            vVaVa = vAxis.scale(vVa);
+        } else {
+            vVaVa = vAxis.scale(vVa); //vVAVA=vVa*vAxis
             try {
-                vMinusVVaVa = v.subtract(vVaVa);
+                vMinusVVaVa = v.subtract(vVaVa); //v-vVaVa
             } catch (IllegalArgumentException e1) { // the rays is parallel to axis
                 return null;
             }
@@ -93,27 +93,29 @@ public class Tube extends RadialGeometry {
 
         Vector deltaP = null;
         try {
-            deltaP = p0.subtract(axisRay.getP0());
+            deltaP = p0.subtract(axisRay.getP0()); //deltaP=p0-pAxis
         } catch (IllegalArgumentException e1) { // the ray begins at axis P0
-            if (vVa == 0) // the ray is orthogonal to Axis
-                return List.of(ray.getPoint(radius));
+            // the ray is orthogonal to Axis, only one intersection on edge
+            if (vVa == 0) {
+                return List.of(new GeoPoint(this, ray.getPoint(radius))); //return paxis+radius*vaxis
+            }
 
             double t = alignZero(Math.sqrt(radius * radius / vMinusVVaVa.lengthSquared()));
-            return t == 0 ? null : List.of(ray.getPoint(t));
+            return t == 0 ? null : List.of(new GeoPoint(this, ray.getPoint(t)));
         }
 
-        double dPVAxis = alignZero(deltaP.dotProduct(vAxis));
+        double dPVAxis = alignZero(deltaP.dotProduct(vAxis)); //dpvaxis=deltap*vaxis
         Vector dPVaVa;
         Vector dPMinusdPVaVa;
-        if (dPVAxis == 0)
+        if (dPVAxis == 0) {
             dPMinusdPVaVa = deltaP;
-        else {
+        } else {
             dPVaVa = vAxis.scale(dPVAxis);
             try {
                 dPMinusdPVaVa = deltaP.subtract(dPVaVa);
             } catch (IllegalArgumentException e1) {
                 double t = alignZero(Math.sqrt(radius * radius / a));
-                return t == 0 ? null : List.of(ray.getPoint(t));
+                return t == 0 ? null : List.of(new GeoPoint(this, ray.getPoint(t)));
             }
         }
 
@@ -138,11 +140,8 @@ public class Tube extends RadialGeometry {
 
         // if both t1 and t2 are positive
         if (t2 > 0)
-            return List.of(ray.getPoint(t1), ray.getPoint(t2));
+            return List.of(new GeoPoint(this, ray.getPoint(t1)), new GeoPoint(this, ray.getPoint(t2)));
         else // t2 is behind the head
-            return List.of(ray.getPoint(t1));
-
-//        return null;
-
+            return List.of(new GeoPoint(this, ray.getPoint(t1)));
     }
 }
