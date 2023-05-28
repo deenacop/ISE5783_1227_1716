@@ -8,12 +8,14 @@ import geometries.Intersectable.GeoPoint;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
+
 /**
 
  Ray class represents a ray in Cartesian 3D coordinate system, composed of a starting point and a direction vector.
  */
 public class Ray {
 
+    private static final double DELTA = 0.1;
     /** The starting point of the ray */
     final Point p0;
 
@@ -31,6 +33,24 @@ public class Ray {
         this.dir = dir.normalize();
     }
 
+    /**
+     * construct a ray and move point slightly
+     *
+     * @param point     the point
+     * @param direction direction vector
+     * @param n         normal
+     */
+    public Ray(Point point, Vector direction, Vector n) {
+        double nv = alignZero(direction.dotProduct(n));
+        if (nv < 0) {
+            this.p0 = point.add(n.scale(-DELTA));
+
+        } else {
+            this.p0 = point.add(n.scale(DELTA));
+        }
+        this.dir = direction.normalize();
+    }
+
 
     /**
 
@@ -40,6 +60,11 @@ public class Ray {
     public Point getP0() {
         return p0;
     }
+
+    public Point getP0(double d) {
+        return p0.add(dir.scale(d));
+    }
+
     /**
 
      Returns the direction vector of the ray.

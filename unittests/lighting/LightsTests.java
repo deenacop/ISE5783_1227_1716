@@ -8,8 +8,7 @@ import primitives.*;
 import renderer.*;
 import scene.Scene;
 
-import static java.awt.Color.BLUE;
-import static java.awt.Color.WHITE;
+import static java.awt.Color.*;
 
 /**
  * Test rendering a basic image
@@ -114,6 +113,23 @@ public class LightsTests {
         camera1.writeToImage(); //
     }
 
+    @Test
+    public void sphereMultiLights() {
+        scene1.geometries.add(sphere);
+        scene1.lights.add(new SpotLight(sphereLightColor, sphereLightPosition, new Vector(1, 1, -0.5))
+                .setKl(0.001).setKq(0.0001));
+        scene1.lights.add(new DirectionalLight(new Color(GREEN),new Vector(5,5,5)));
+        scene1.lights.add(new PointLight(new Color(YELLOW),new Point(30, 10, -100)));
+        scene1.lights.add(new SpotLight(new Color(GREEN), new Point(0, 1, 4), new Vector(0, 1, -0.5))
+                .setKl(0.000000003).setKq(0.000000003));
+
+        ImageWriter imageWriter = new ImageWriter("sphereMultiLights", 500, 500);
+        camera1.setImageWriter(imageWriter) //
+                .setRayTracer(new RayTracerBasic(scene1)) //
+                .renderImage();//
+        camera1.writeToImage(); //
+    }
+
     /**
      * Produce a picture of two triangles lighted by a directional light
      */
@@ -122,7 +138,26 @@ public class LightsTests {
         scene2.geometries.add(triangle1, triangle2);
         scene2.lights.add(new DirectionalLight(trianglesLightColor, trianglesLightDirection));
 
+
         ImageWriter imageWriter = new ImageWriter("lightTrianglesDirectional", 500, 500);
+        camera2.setImageWriter(imageWriter) //
+                .setRayTracer(new RayTracerBasic(scene2)) //
+                .renderImage(); //
+        camera2.writeToImage(); //
+    }
+
+
+    @Test
+    public void trianglesMultiLights() {
+        scene2.geometries.add(triangle1, triangle2);
+        scene2.lights.add(new PointLight(trianglesLightColor, trianglesLightPosition)
+                .setKl(0.001).setKq(0.0002));
+        scene2.lights.add(new DirectionalLight(new Color(RED),new Vector(5,5,5)));
+        scene2.lights.add(new PointLight(new Color(YELLOW),new Point(30, 10, -100)));
+        scene2.lights.add(new SpotLight(new Color(RED), new Point(0, 1, 4), new Vector(0, 1, -0.5))
+                .setKl(0.000000003).setKq(0.000000003));
+
+        ImageWriter imageWriter = new ImageWriter("trianglesMultiLights", 500, 500);
         camera2.setImageWriter(imageWriter) //
                 .setRayTracer(new RayTracerBasic(scene2)) //
                 .renderImage(); //

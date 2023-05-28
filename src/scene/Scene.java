@@ -51,6 +51,10 @@ public class Scene {
         return this;
     }
 
+    public List<LightSource> getLights() {
+        return lights;
+    }
+
 
 
 //    public static class SceneBuilder {

@@ -12,9 +12,9 @@ public class Triangle extends Polygon {
     }
 
     @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         //first find the intersections with the plane in which the triangle lays
-        List<GeoPoint> intersections = plane.findGeoIntersections(ray);
+        List<GeoPoint> intersections = plane.findGeoIntersections(ray, maxDistance);
 
         //if the plane has no intersections so there are no intersections, so return null
         if (intersections == null)
@@ -40,8 +40,8 @@ public class Triangle extends Polygon {
             return null;//the point is out of triangle
 
         //update the geometry
-        for (GeoPoint geoPoint : intersections) {
-            geoPoint.geometry = this;
+        for (GeoPoint gp : intersections) {
+            gp.geometry = this;
         }
 
         //if they all have the same sign then return the intersections , otherwise return null

@@ -1,39 +1,39 @@
 package geometries;
 
 import org.junit.jupiter.api.Test;
-import primitives.*;
+import primitives.Point;
+import primitives.Ray;
+import primitives.Vector;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TubeTest {
-
     /**
-     * Test method for {@link Tube GetNormal}
+     * Test method for {@link geometries.Tube#getNormal(Point)}.
      */
     @Test
     void testGetNormal() {
+        Tube t = new Tube(new Ray(new Point(0.0, 0.0, 1.0), new Vector(0.0, 0.0, 2.0)), 4);
+        Tube t2 = new Tube(new Ray(new Point(0.0, 1.0, 0.0), new Vector(0.0, 2.0, 0.0)), 1);
+
         // ============ Equivalence Partitions Tests ==============
-        // TC01: There is a simple single test here
-        Tube tube = new Tube(new Ray(new Point(0, 0, 1), new Vector(0, -1, 0)), 1.0);
+        //there is only one part to test- points that are on the tube because it is infinite
+        //the tube we are testing has an axis ray that is the z-axis
 
-        Vector normal = tube.getNormal(new Point(0, 0.5, 2)).normalize();
+        assertEquals(new Vector(0, 1, 0), t.getNormal(new Point(0.0, 4.0, 0.0)), "getNormal does not work correctly");
+        assertEquals(new Vector(-1, 0, 0), t.getNormal(new Point(-4.0, 0.0, 0.0)), "getNormal does not work correctly");
 
-        double dotProduct = normal.dotProduct(tube.getAxisRay().getDir());
-        assertEquals(0d, dotProduct, "normal is not orthogonal to the tube");
-
-        boolean firstnormal = new Vector(0, 0, 1).equals(normal);
-        boolean secondtnormal = new Vector(0, 0, -1).equals(normal);
-
-        assertTrue(firstnormal || secondtnormal, "Bad normal to tube");
-
-        assertEquals(new Vector(0, 0, 1), normal, "Bad normal to tube");
+        assertEquals(new Vector(-1, 0, 0), t2.getNormal(new Point(-1.0, 0.0, 0.0)), "getNormal does not work correctly");
+        assertEquals(new Vector(0, 0, 1), t2.getNormal(new Point(0.0, 0.0, 1.0)), "getNormal does not work correctly");
     }
 
-
+    /**
+     * Test method for {@link geometries.Tube#findIntersections(primitives.Ray)}.
+     */
     @Test
-    public void testFindIntersectionsRay() {
+    public void testFindIntersections() {
         Tube tube1 = new Tube(new Ray(new Point(1, 0, 0), new Vector(0, 1, 0)),1d);
         Vector vAxis = new Vector(0, 0, 1);
         Tube tube2 = new Tube( new Ray(new Point(1, 1, 1), vAxis),1d);

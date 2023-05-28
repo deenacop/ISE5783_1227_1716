@@ -10,6 +10,14 @@ public class Material {
     public Double3 kS = Double3.ZERO;
     // Field represents the shininess of the material
     public int nShininess = 0;
+    /**
+     * Field represents the transparency attenuation factor
+     */
+    public Double3 kT = Double3.ZERO;
+    /**
+     * Field represents the reflectivity attenuation factor
+     */
+    public Double3 kR = Double3.ZERO;
 
     /**
      * Builder patterns setter for field kD
@@ -58,6 +66,50 @@ public class Material {
      */
     public Material setShininess(int nShininess) {
         this.nShininess = nShininess;
+        return this;
+    }
+
+    /**
+     * Builder patterns setter for field kR
+     *
+     * @param kR parameter for kT constructor
+     * @return Material object
+     */
+    public Material setKr(Double3 kR) {
+        this.kR = kR;
+        return this;
+    }
+
+    /**
+     * Builder patterns setter for field kR
+     *
+     * @param value parameter for kR constructor
+     * @return Material object
+     */
+    public Material setKr(double value) {
+        this.kR = new Double3(value);
+        return this;
+    }
+
+    /**
+     * Builder patterns setter for field kT
+     *
+     * @param kT parameter for kT constructor
+     * @return Material object
+     */
+    public Material setKt(Double3 kT) {
+        this.kT = kT;
+        return this;
+    }
+
+    /**
+     * Builder patterns setter for field kT
+     *
+     * @param value parameter for kT constructor
+     * @return Material object
+     */
+    public Material setKt(double value) {
+        this.kT = new Double3(value);
         return this;
     }
 }

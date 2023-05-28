@@ -94,9 +94,9 @@ public class Polygon extends Geometry {
    * @return a list of intersection points, or null if the ray doesn't intersect with the polygon
     */
    @Override
-   protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+   protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
       //first, find the intersections for the plane in which the polygon is
-      List<GeoPoint> result = plane.findGeoIntersections(ray);
+      List<GeoPoint> result = plane.findGeoIntersections(ray, maxDistance);
 
       if (result == null) { //if the intersections with the plane returned null so return null
          return null;
@@ -141,8 +141,8 @@ public class Polygon extends Geometry {
       }
 
       //update the geometry
-      for (GeoPoint geoPoint : result) {
-         geoPoint.geometry = this;
+      for (GeoPoint gp : result) {
+         gp.geometry = this;
       }
 
       return result;

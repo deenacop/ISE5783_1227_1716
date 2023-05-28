@@ -4,6 +4,7 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
@@ -57,15 +58,15 @@ public class Tube extends RadialGeometry {
     }
 
     /**
-
-     Finds the intersection points between a given ray and a tube (i.e., a cylinder with open ends).
-     The tube is defined by an axis ray and a radius, and the method uses a quadratic equation to solve for the intersection points.
-     If there are no intersection points, the method returns null.
-     @param ray The input ray to find intersections with
-     @return A list of intersection points between the ray and the tube, or null if there are no intersections
+     * Finds the intersection points between a given ray and a tube (i.e., a cylinder with open ends).
+     * The tube is defined by an axis ray and a radius, and the method uses a quadratic equation to solve for the intersection points.
+     * If there are no intersection points, the method returns null.
+     *
+     * @param ray The input ray to find intersections with
+     * @return A list of intersection points between the ray and the tube, or null if there are no intersections
      */
     @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         Vector vAxis = axisRay.getDir(); //direction of the axis ray
         Vector v = ray.getDir(); //direction of ray
         Point p0 = ray.getP0(); //point of ray
@@ -97,11 +98,23 @@ public class Tube extends RadialGeometry {
         } catch (IllegalArgumentException e1) { // the ray begins at axis P0
             // the ray is orthogonal to Axis, only one intersection on edge
             if (vVa == 0) {
-                return List.of(new GeoPoint(this, ray.getPoint(radius))); //return paxis+radius*vaxis
+                Point point = ray.getPoint(radius);
+                double dis = point.distance(ray.getP0());
+                if (alignZero(dis - maxDistance) <= 0) //if the distance is less than maximum
+                    return List.of(new GeoPoint(this, point)); //return paxis+radius*vaxis
             }
 
             double t = alignZero(Math.sqrt(radius * radius / vMinusVVaVa.lengthSquared()));
-            return t == 0 ? null : List.of(new GeoPoint(this, ray.getPoint(t)));
+            if (t == 0)
+                return null;
+
+            Point point = ray.getPoint(t);
+            double dis = point.distance(ray.getP0());
+            if (alignZero(dis - maxDistance) <= 0) //if the distance is less than maximum
+                return List.of(new GeoPoint(this, point));
+
+            else
+                return null;
         }
 
         double dPVAxis = alignZero(deltaP.dotProduct(vAxis)); //dpvaxis=deltap*vaxis
@@ -115,7 +128,16 @@ public class Tube extends RadialGeometry {
                 dPMinusdPVaVa = deltaP.subtract(dPVaVa);
             } catch (IllegalArgumentException e1) {
                 double t = alignZero(Math.sqrt(radius * radius / a));
-                return t == 0 ? null : List.of(new GeoPoint(this, ray.getPoint(t)));
+                if (t == 0)
+                    return null;
+
+                Point point = ray.getPoint(t);
+                double dis = point.distance(ray.getP0());
+                if (alignZero(dis - maxDistance) <= 0) //if the distance is less than maximum
+                    return List.of(new GeoPoint(this, point));
+
+                else
+                    return null;
             }
         }
 
@@ -139,9 +161,31 @@ public class Tube extends RadialGeometry {
         double t2 = alignZero(tm - th);
 
         // if both t1 and t2 are positive
-        if (t2 > 0)
-            return List.of(new GeoPoint(this, ray.getPoint(t1)), new GeoPoint(this, ray.getPoint(t2)));
-        else // t2 is behind the head
-            return List.of(new GeoPoint(this, ray.getPoint(t1)));
+        if (t2 > 0) {
+            List<GeoPoint> list = null;
+
+            Point point = ray.getPoint(t1);
+            double dis = point.distance(ray.getP0());
+            if (alignZero(dis - maxDistance) <= 0) { //if the distance is less than maximum
+                list = new LinkedList<>();
+                list.add(new GeoPoint(this, point));
+            }
+
+            point = ray.getPoint(t2);
+            dis = point.distance(ray.getP0());
+            if (alignZero(dis - maxDistance) <= 0) { //if the distance is less than maximum
+                if (list == null)
+                    list = new LinkedList<>();
+                list.add(new GeoPoint(this, point));
+            }
+            return list;
+        } else { // t2 is behind the head
+            Point point = ray.getPoint(t1);
+            double dis = point.distance(ray.getP0());
+            if (alignZero(dis - maxDistance) <= 0) { //if the distance is less than maximum
+                return List.of(new GeoPoint(this, ray.getPoint(t1)));
+            }
+            return null;
+        }
     }
 }

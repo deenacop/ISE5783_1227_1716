@@ -38,7 +38,7 @@ public class Camera {
         this.vTo = vTo.normalize();
         this.vUp = vUp.normalize();
 
-        this.vRight = this.vTo.crossProduct(this.vUp);
+        this.vRight = this.vTo.crossProduct(vUp);
 
     }
 
@@ -91,36 +91,35 @@ public class Camera {
     /**
      * Constructing a ray through a pixel
      *
-     * @param Nx
-     * @param Ny
+     * @param nX
+     * @param nY
      * @param j
      * @param i
      * @return ray form the camera to Pixel[i,j]
      */
-    public Ray constructRay(int Nx, int Ny, int j, int i) {
-        //Image center
-        Point Pc = p0.add(vTo.scale(distance));
+    public Ray constructRay(int nX, int nY, int j, int i) {
+        //image center
+        Point pC = this.p0.add(this.vTo.scale(this.distance));
 
-        //Ratio (pixel width & height)
-        double Ry = height / Ny;
-        double Rx = width / Nx;
+        // Ratio (pixel width and height)
+        double Ry = this.height / (double) nY;
+        double Rx = this.width / (double) nX;
 
-        //Pixel[i,j] center
-        Point Pij = Pc;
+        //pixel[i,j] center
+        Point Pij = pC;
+        double Yi = -((double) i - (double) (nY - 1) / 2.0D) * Ry;
+        double Xj = ((double) j - (double) (nX - 1) / 2.0D) * Rx;
 
-        //delta values for going to Pixel[i,j]  from Pc
-
-        double yI = -(i - (Ny - 1) / 2d) * Ry;
-        double xJ = (j - (Nx - 1) / 2d) * Rx;
-
-        if (!isZero(xJ)) {
-            Pij = Pij.add(vRight.scale(xJ));
-        }
-        if (!isZero(yI)) {
-            Pij = Pij.add(vUp.scale(yI));
+        if (!Util.isZero(Yi)) {
+            Pij = pC.add(this.vUp.scale(Yi));
         }
 
-        return new Ray(p0, Pij.subtract(p0));
+        if (!Util.isZero(Xj)) {
+            Pij = Pij.add(this.vRight.scale(Xj));
+        }
+
+        //return Ray{p0=p0, direction=pij-p0}
+        return new Ray(this.p0, Pij.subtract(this.p0));
     }
 
 

@@ -1,51 +1,55 @@
 package geometries;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import primitives.*;
+import primitives.Point;
+import primitives.Ray;
+import primitives.Vector;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class TriangleTest {
 
     /**
-     * Test method for {@link Triangle GetNormal}
+     * Test method for {@link geometries.Triangle#findIntersections(primitives.Ray)}.
      */
     @Test
-    void testGetNormal() {
+    void testFindIntersections() {
+        Triangle t = new Triangle(new Point(1.0, 3.0, 5.0), new Point(5.0, 3.0, 1.0), new Point(0.0, 3.0, 1.0));
+
         // ============ Equivalence Partitions Tests ==============
-        // TC01: There is a simple single test here
-        Triangle triangle = new Triangle(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0));
-        double sqrt3 = Math.sqrt(1d / 3);
-        assertEquals(new Vector(sqrt3, sqrt3, sqrt3),
-                triangle.getNormal(new Point(0, 0, 1)),
-                "ERROR: Bad normal to triangle");
-    }
 
-    @Test
-    void testFindIntersectionsEP() {
-        Triangle triangle = new Triangle(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0));
-        Plane plane = new Plane(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0));
-        Ray ray;
-        // ============ Equivalence Partitions Tests ==============
-        // TC01: Inside triangle
-        ray = new Ray(new Point(1, 1, 1), new Vector(-1, -1, -1));
-        assertEquals(List.of(new Point(1d / 3, 1d / 3, 1d / 3)), triangle.findIntersections(ray),
-                "Bad intersection");
+        //case 1- ray intersects with triangle
+        Ray r = new Ray(new Point(1.0, -5.0, 4.0), new Vector(0.0, 3.0, 0.0));
+        List<Point> l = t.findIntersections(r);
+        assertEquals(new Point(1.0, 3.0, 4.0), l.get(0));
 
-        // TC02: Against edge
-        ray = new Ray(new Point(0, 0, -1), new Vector(1, 1, 0));
-        assertEquals(List.of(new Point(1, 1, -1)), plane.findIntersections(ray),
-                "Wrong intersection with plane");
-        assertNull(triangle.findIntersections(ray), "Bad intersection");
+        //case 2- ray intersects with plane but outside the triangle against edge
+        r = new Ray(new Point(1.0, -5.0, 4.0), new Vector(3.0, 0.0, -1.0));
+        l = t.findIntersections(r);
+        assertEquals(null, l);
 
-        // TC03: Against vertex
-        ray = new Ray(new Point(0, 0, 2), new Vector(-1, -1, 0));
-        assertEquals(List.of(new Point(-0.5, -0.5, 2)), plane.findIntersections(ray),
-                "Wrong intersection with plane");
-        assertNull(triangle.findIntersections(ray), "Bad intersection");
+        //case 3- ray intersects with plane but outside the triangle against vertex
+        r = new Ray(new Point(1.0, -5.0, 4.0), new Vector(1.0, 3.0, 6.0));
+        l = t.findIntersections(r);
+        assertEquals(null, l);
 
+        // =============== Boundary Values Tests ==================
+
+        //case 1- the ray begins before the plane on the edge of triangle
+        r = new Ray(new Point(4.0, 2.0, 1.0), new Vector(0.0, 1.0, 0.0));
+        l = t.findIntersections(r);
+        assertEquals(null, l);
+
+        //case 2- the ray begins before the plane on vertex
+        r = new Ray(new Point(1.0, 2.0, 5.0), new Vector(0.0, 1.0, 0.0));
+        l = t.findIntersections(r);
+        assertEquals(null, l);
+
+        //case 3- the ray begins before the plane on edge's continuation
+        r = new Ray(new Point(8.0, 2.0, 1.0), new Vector(0.0, 1.0, 0.0));
+        l = t.findIntersections(r);
+        assertEquals(null, l);
     }
 }

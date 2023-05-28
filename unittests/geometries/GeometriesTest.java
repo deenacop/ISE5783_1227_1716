@@ -9,40 +9,40 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GeometriesTest {
+class GeometriesTest {
+    /**
+     * Test method for {@link geometries.Geometries#findIntersections(primitives.Ray)}.
+     */
     @Test
     void testFindIntersections() {
         Geometries geometries = new Geometries();
+
+        // =============== Boundary Values Tests ==================
+        //TC01: empty geometries list
+        assertNull(geometries.findIntersections(new Ray(new Point(0.0, 1.0, 0.0), new Vector(1.0, 0.0, 5.0))));
+
+        geometries.add(new Plane(new Point(1.0, 1.0, 0.0), new Vector(0.0, 0.0, 1.0)));
+        geometries.add(new Triangle(new Point(1.0, 0.0, 0.0), new Point(0.0, 1.0, 0.0), new Point(0.0, 0.0, 1.0)));
+        geometries.add(new Sphere(1.0, new Point(1.0, 0.0, 0.0)));
+
+        //TC02: each geometry doesn't have intersection points
+        assertNull(geometries.findIntersections(new Ray(new Point(0.0, 0.0, 2.0), new Vector(0.0, -1.0, 0.0))));
+
+        //TC03: just one geometry has intersections point
+        assertEquals(1, geometries.findIntersections(new Ray(new Point(0.0, 5.0, -1.0), new Vector(0.0, 0.0, 1.0))).size());
+
+        //TC04: All the geometries have intersection points
+        Geometries geo2 = new Geometries();
+        geo2.add(new Sphere(5, new Point(4, 0, 0)));
+        geo2.add(new Triangle(new Point(1, 4, 0), new Point(1, 2, 0), new Point(5, 2, 0)));
+        geo2.add(new Plane(new Point(1, 2, 0), new Point(0, 7, 0), new Point(1, 0, 0)));
+        List<Point> pointList = geo2.findIntersections(new Ray(new Point(2, 5, 4), new Vector(0, -2, -4)));
+        assertEquals(4, pointList.size(), "Wrong number of points");
+
+
         // ============ Equivalence Partitions Tests ==============
-        // TC01: There is a simple single test here
-
-
-        // ============ Boundary Value Test ==============
-
-        //checks for an empty geometry list.
-        assertNull(geometries.findIntersections(new Ray(new Point(1, 1, 1), new Vector(1, 0, 0))), "empty collection");
-
-        // checks for no intersections
-        Triangle triangle = new Triangle(new Point(1, 1, 1), new Point(0.5, -1, 0), new Point(1.5, -1, 0));
-        Sphere sphere = new Sphere(1, new Point(1, 0, 0));
-        Plane plane = new Plane(new Point(3, 0, 0), new Vector(0, 0, 1));
-
-        geometries = new Geometries(plane, sphere, triangle);
-        assertNull(geometries.findIntersections(new Ray(new Point(0, 0, 10), new Vector(1, 0, 0))));
-
-        //checks for one expected intersection
-        geometries = new Geometries(triangle, plane, new Sphere(3, new Point(0, 0, 3)));
-        assertEquals(1, geometries.findIntersections(new Ray(new Point(0, 0, 4), new Vector(0, 0, 1))).size());
-
-        //checks for expected more than one shape intersecting
-        geometries = new Geometries(triangle, new Plane(new Point(0, 0, 7), new Vector(0, 0, 1)), new Sphere(2, new Point(0, 0, 3)));
-        assertEquals(3, geometries.findIntersections(new Ray(new Point(0, 0, 0.5), new Vector(0, 0, 1))).size());
-
-        // intersects with all the shapes
-        geometries = new Geometries(new Triangle(new Point(-1, -1, 8), new Point(2, 0, 8), new Point(-1, 1, 8)), new Plane(new Point(0, 0, 7), new Vector(0, 0, 1)), new Sphere(2, new Point(0, 0, 3)));
-        assertEquals(4, geometries.findIntersections(new Ray(new Point(0, 0, 0.5), new Vector(0, 0, 1))).size());
-
+        //TC11: part of the geometries has intersection points
+        assertEquals(2, geometries.findIntersections(new Ray(new Point(1.0, 0.0, -1.0), new Vector(0.0, 0.0, 1.0))).size());
 
     }
-
 }
