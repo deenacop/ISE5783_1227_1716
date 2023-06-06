@@ -4,9 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57f24473-b75d-4609-8a6d-ff3a6fd71fa2" name="Changes" comment="pictures">
+    <list default="true" id="57f24473-b75d-4609-8a6d-ff3a6fd71fa2" name="Changes" comment="view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Cylinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Cylinder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lighting/DirectionalLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/DirectionalLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lighting/LightSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/LightSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lighting/PointLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/PointLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Material.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Vector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unittests/project/picturesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/project/picturesTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,16 +87,8 @@
       <recent name="geometries" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.picturesTest.beautifulPictureScene">
-    <configuration name="All in ISE5783_1227_1716" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5783_1227_1716" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="picturesTest.beautifulPictureScene" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.picturesTest.test_image">
+    <configuration name="picturesTest.PR08" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1227_1716" />
       <extension name="coverage">
         <pattern>
@@ -98,13 +98,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="project" />
       <option name="MAIN_CLASS_NAME" value="project.picturesTest" />
-      <option name="METHOD_NAME" value="beautifulPictureScene" />
+      <option name="METHOD_NAME" value="PR08" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="picturesTest.earthPictureScene" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="picturesTest.PR081" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1227_1716" />
       <extension name="coverage">
         <pattern>
@@ -114,13 +114,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="project" />
       <option name="MAIN_CLASS_NAME" value="project.picturesTest" />
-      <option name="METHOD_NAME" value="earthPictureScene" />
+      <option name="METHOD_NAME" value="PR081" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="picturesTest.impressiveTrainScene" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="picturesTest.test_Glossy" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1227_1716" />
       <extension name="coverage">
         <pattern>
@@ -130,13 +130,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="project" />
       <option name="MAIN_CLASS_NAME" value="project.picturesTest" />
-      <option name="METHOD_NAME" value="impressiveTrainScene" />
+      <option name="METHOD_NAME" value="test_Glossy" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="picturesTest.initial_image_7" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="picturesTest.test_image" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1227_1716" />
       <extension name="coverage">
         <pattern>
@@ -146,7 +146,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="project" />
       <option name="MAIN_CLASS_NAME" value="project.picturesTest" />
-      <option name="METHOD_NAME" value="initial_image_7" />
+      <option name="METHOD_NAME" value="test_image" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="picturesTest.test_image_SS" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5783_1227_1716" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="project.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="project" />
+      <option name="MAIN_CLASS_NAME" value="project.picturesTest" />
+      <option name="METHOD_NAME" value="test_image_SS" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -154,11 +170,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.picturesTest.beautifulPictureScene" />
-        <item itemvalue="JUnit.picturesTest.initial_image_7" />
-        <item itemvalue="JUnit.All in ISE5783_1227_1716" />
-        <item itemvalue="JUnit.picturesTest.earthPictureScene" />
-        <item itemvalue="JUnit.picturesTest.impressiveTrainScene" />
+        <item itemvalue="JUnit.picturesTest.test_image" />
+        <item itemvalue="JUnit.picturesTest.PR081" />
+        <item itemvalue="JUnit.picturesTest.test_Glossy" />
+        <item itemvalue="JUnit.picturesTest.PR08" />
+        <item itemvalue="JUnit.picturesTest.test_image_SS" />
       </list>
     </recent_temporary>
   </component>
@@ -206,7 +222,14 @@
       <workItem from="1685256405199" duration="19697000" />
       <workItem from="1685359041967" duration="6229000" />
       <workItem from="1685437004324" duration="1813000" />
-      <workItem from="1685439388591" duration="4109000" />
+      <workItem from="1685439388591" duration="6707000" />
+      <workItem from="1685459711233" duration="2746000" />
+      <workItem from="1685601996552" duration="5912000" />
+      <workItem from="1685613979491" duration="773000" />
+      <workItem from="1685624492620" duration="13360000" />
+      <workItem from="1685689580217" duration="5504000" />
+      <workItem from="1685862632015" duration="950000" />
+      <workItem from="1685986351150" duration="11594000" />
     </task>
     <task id="LOCAL‎-00001" summary="finish vector">
       <created>1678098771109</created>
@@ -285,7 +308,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1685283448111</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL‎-00012" summary="view">
+      <created>1685443755137</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL‎-00012" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1685443755137</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,7 +334,8 @@
     <MESSAGE value="light and color" />
     <MESSAGE value="color and spotlight" />
     <MESSAGE value="pictures" />
-    <option name="LAST_COMMIT_MESSAGE" value="pictures" />
+    <MESSAGE value="view" />
+    <option name="LAST_COMMIT_MESSAGE" value="view" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

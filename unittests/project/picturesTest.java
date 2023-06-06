@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import primitives.*;
 import renderer.*;
-import scene.Scene;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +26,8 @@ public class picturesTest {
     private Scene scene = new Scene("Test scene");
 
     @Test
-    public void beautifulPictureScene() {
-        Camera camera = new Camera(
-                new Point(0, 0, 800), new Vector(0, 0, -1), new Vector(0, 1, 0))
-                .setViewPlaneSize(1000, 1000).setViewPlaneDistance(1000);
-
-        Scene scene = new Scene("beautiful_picture_scene");
+    public Scene beautifulPictureScene(String name) {
+        Scene scene = new Scene(name);
         scene.setBackground(new Color(135, 206, 235)); // Sky blue background
 
         // Ambient light
@@ -47,7 +42,7 @@ public class picturesTest {
 
         // Sun
         Geometry sun = new Sphere(150, new Point(400, 500, -800))
-                .setEmission(new Color(255, 255, 0)) // Yellow sun
+                .setEmission(new Color(255, 255, 0)) // Yellow sun ray
                 .setMaterial(new Material().setKd(0).setKs(0).setShininess(100));
         scene.geometries.add(sun);
 
@@ -68,7 +63,7 @@ public class picturesTest {
             scene.geometries.add(ray);
         }
 
-// Chimney for the house
+        // Chimney for the house
         scene.geometries.add(new Polygon(
                 new Point(100, 100, -600),
                 new Point(100, 200, -600),
@@ -80,11 +75,13 @@ public class picturesTest {
 
         // Spotlight from the sun
 
-        scene.lights.add(new PointLight(new Color(white), new Point(400, 350, -700)).setKl(0.00001).setKq(0.000003));
+        scene.lights.add(new PointLight(new Color(white), new Point(200, 350, -700)).setKl(0.00001).setKq(0.000003));
         scene.lights.add(new DirectionalLight(new Color(0, 0, 0), new Vector(1, 1, -0.5)));
         scene.lights.add(new SpotLight(new Color(0, 0, 0), new Vector(1, 1, -0.5), new Vector(1, 1, -0.5))
                 .setKl(0.001).setKq(0.0001));
-        scene.lights.add(new DirectionalLight(new Color(GREEN),new Vector(0,1,5)));
+        scene.lights.add(new DirectionalLight(new Color(GREEN), new Vector(0, 1, 5)));
+
+
         // Clouds
         int numClouds = 20;
         int cloudRadius = 80;
@@ -101,13 +98,39 @@ public class picturesTest {
             scene.geometries.add(cloud);
         }
 
-
         // House
         scene.geometries.add(new Polygon(
                 new Point(-200, -200, -400),
                 new Point(200, -200, -400),
                 new Point(200, 200, -400),
                 new Point(-200, 200, -400))
+                .setEmission(new Color(181, 101, 29)) // light brown house
+                .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(300)));
+
+        // Back wall
+        scene.geometries.add(new Polygon(
+                new Point(-200, -200, -800),
+                new Point(200, -200, -800),
+                new Point(200, 200, -800),
+                new Point(-200, 200, -800))
+                .setEmission(new Color(181, 101, 29)) // light brown house
+                .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(300)));
+
+        // Left wall
+        scene.geometries.add(new Polygon(
+                new Point(-200, -200, -400),
+                new Point(-200, -200, -800),
+                new Point(-200, 200, -800),
+                new Point(-200, 200, -400))
+                .setEmission(new Color(181, 101, 29)) // light brown house
+                .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(300)));
+
+        // Right wall
+        scene.geometries.add(new Polygon(
+                new Point(200, -200, -400),
+                new Point(200, -200, -800),
+                new Point(200, 200, -800),
+                new Point(200, 200, -400))
                 .setEmission(new Color(181, 101, 29)) // light brown house
                 .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(300)));
 
@@ -128,7 +151,6 @@ public class picturesTest {
         scene.geometries.add(doorHandle);
 
 
-
         // Add window to the house
         Geometry window = new Polygon(
                 new Point(-150, 50, -399),
@@ -136,94 +158,285 @@ public class picturesTest {
                 new Point(-50, 150, -399),
                 new Point(-150, 150, -399))
                 .setEmission(new Color(135, 206, 250)) // Light blue window
-                .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(100));
+                .setMaterial(new Material().setKd(0.8).setKs(0.8).setShininess(30));
         scene.geometries.add(window);
 
+        // Roof
+        scene.geometries.add(new Triangle(
+                new Point(-250, 180, -350),
+                new Point(250, 180, -350),
+                new Point(0, 430, -550))
+                .setEmission(new Color(128, 0, 0)) // Gray roof
+                .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(300)));
 
-        scene.geometries.add(new Triangle(new Point(-300, 200, -400),
-                new Point(0, 400, -400),
-                new Point(300, 200, -400))
-                .setEmission(new Color(128, 0, 0)) // Maroon roof
-                .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(100)));
-// Fence
-        int fenceHeight = 150;
+        scene.geometries.add(new Triangle(
+                new Point(-250, 180, -350),
+                new Point(0, 430, -550),
+                new Point(-250, 180, -850))
+                .setEmission(new Color(128, 0, 0)) // Gray roof
+                .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(300)));
+
+        scene.geometries.add(new Triangle(
+                new Point(250, 180, -350),
+                new Point(250, 180, -850),
+                new Point(0, 430, -550))
+                .setEmission(new Color(128, 0, 0)) // Gray roof
+                .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(300)));
+
+        scene.geometries.add(new Triangle(
+                new Point(0, 430, -550),
+                new Point(-250, 180, -850),
+                new Point(250, 180, -850))
+                .setEmission(new Color(128, 0, 0)) // Gray roof
+                .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(300)));
+
+
+        // Fence
+        int fenceHeight = 160;
         int fenceWidth = 20;
         int fenceSpacing = 50;
         int numFencePosts = 20;
 
-// Create horizontal fence rails
+        // Create horizontal fence rails
         for (int i = 0; i < numFencePosts; i++) {
             double x = -200 + (fenceSpacing * i);
+            double railZ = -400 - (fenceWidth / 2); // Adjust the Z-coordinate of the rails
 
-            Geometry rail1 = new Polygon(
-                    new Point(x, -200, -400),
-                    new Point(x + fenceWidth, -200, -400),
-                    new Point(x + fenceWidth, -200 + fenceHeight, -400),
-                    new Point(x, -200 + fenceHeight, -400))
+            Point rail1Center = new Point(x + (fenceWidth / 2), -300 + (fenceHeight / 2), railZ);
+            Vector rail1Dir = new Vector(0, 1, 0); // Direction along the length of the rail
+            Ray rail1AxisRay = new Ray(rail1Center, rail1Dir);
+            Geometry rail1 = new Cylinder(rail1AxisRay, fenceHeight, fenceWidth / 2)
                     .setEmission(new Color(139, 69, 19)) // Brown fence rail
                     .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(100));
             scene.geometries.add(rail1);
 
-            Geometry rail2 = new Polygon(
-                    new Point(-x, -200, -400),
-                    new Point(-(x + fenceWidth), -200, -400),
-                    new Point(-(x + fenceWidth), -200 + fenceHeight, -400),
-                    new Point(-x, -200 + fenceHeight, -400))
+            Point rail2Center = new Point(-(x + (fenceWidth / 2)), -300 + (fenceHeight / 2), railZ);
+            Vector rail2Dir = new Vector(0, 1, 0); // Direction along the length of the rail
+            Ray rail2AxisRay = new Ray(rail2Center, rail2Dir);
+            Geometry rail2 = new Cylinder(rail2AxisRay, fenceHeight, fenceWidth / 2)
                     .setEmission(new Color(139, 69, 19)) // Brown fence rail
                     .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(100));
             scene.geometries.add(rail2);
         }
 
 
-// Path
+        // Path
         int pathWidth = 200;
         int pathLength = 800;
         int numStones = 3000;
         int stoneRadius = 5;
 
-// Create path geometry
+        // Create path geometry
         Geometry path = new Polygon(
                 new Point(-pathWidth / 2, -199, -pathLength / 2),
                 new Point(-pathWidth / 2, -199, pathLength / 2),
                 new Point(pathWidth / 2, -199, pathLength / 2),
                 new Point(pathWidth / 2, -199, -pathLength / 2))
                 .setEmission(new Color(139, 69, 19)) // Ground brown path
-                .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(100));
+                .setMaterial(new Material().setKd(0.8).setKs(0.8).setShininess(30));
         scene.geometries.add(path);
 
-// Create stone spheres along the sides of the path
-        for (int i = 0; i < numStones; i++) {
-            double t = (double) i / (numStones - 1); // Parameter to interpolate between path points
+//        // Create stone spheres along the sides of the path
+//        for (int i = 0; i < numStones; i++) {
+//            double t = (double) i / (numStones - 1); // Parameter to interpolate between path points
+//
+//            double x = -pathWidth / 2 + (t * pathWidth);
+//            double z = -pathLength / 2 + (Math.random() * pathLength);
+//
+//            // Add stones only on the sides of the path
+//            if (x <= -pathWidth / 2 + stoneRadius || x >= pathWidth / 2 - stoneRadius) {
+//                Geometry stone = new Sphere(stoneRadius, new Point(x, -199 + stoneRadius, z))
+//                        .setEmission(new Color(105, 105, 105)) // Dark gray stone
+//                        .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(100));
+//                scene.geometries.add(stone);
+//            }
+//        }
 
-            double x = -pathWidth / 2 + (t * pathWidth);
-            double z = -pathLength / 2 + (Math.random() * pathLength);
+        // Tree trunk
+        Geometry trunk = new Cylinder(new Ray(new Point(800, -200, -1000), new Vector(0, 1, 0)),
+                300, 40)
+                .setEmission(new Color(139, 69, 19)) // Brown trunk
+                .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(100));
+        scene.geometries.add(trunk);
 
-            // Add stones only on the sides of the path
-            if (x <= -pathWidth / 2 + stoneRadius || x >= pathWidth / 2 - stoneRadius) {
-                Geometry stone = new Sphere(stoneRadius, new Point(x, -199 + stoneRadius, z))
-                        .setEmission(new Color(105, 105, 105)) // Dark gray stone
-                        .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(100));
-                scene.geometries.add(stone);
-            }
+        // Tree leaves
+        int numLeaves = 50;
+        int leafRadius = 50;
+
+        for (int k = 0; k < numLeaves; k++) {
+            double x = 400 + (Math.random() * 200);
+            double y = 0 + (Math.random() * 200);
+            double z = -600 + (Math.random() * 200);
+
+            Geometry leaf = new Sphere(leafRadius, new Point(x, y, z))
+                    .setEmission(new Color(34, 139, 34)) // Green leaves
+                    .setMaterial(new Material().setKd(0).setKs(0).setShininess(300));
+            scene.geometries.add(leaf);
         }
 
 
+        return scene;
+    }
+
+    @Test
+    public void test_imageMove() {
+        Camera camera = new Camera(
+                new Point(0, 0, 800), new Vector(0, 0, -1), new Vector(0, 1, 0))
+                .setViewPlaneSize(1000, 1000)
+                .setViewPlaneDistance(1000);
+
+        Scene scene = this.beautifulPictureScene("test");
+
+        int frames = 10;
+        double angle = 360d / frames;
+        double angleRadians = 2 * Math.PI / frames;
+
+        double radius = camera.getP0().subtract(Point.ZERO).length();
+
+        for (int i = 0; i < frames; i++) {
+            camera.rotate(0, angle, 0);
+            camera.setP0(
+                    Math.sin(angleRadians * (i + 1)) * radius,
+                    0,
+                    Math.cos(angleRadians * (i + 1)) * radius
+            );
+
+            camera.setImageWriter(new ImageWriter("moveTest" + (i + 1), 1000, 1000))
+                    .setRayTracer(new RayTracerBasic(scene))
+                    .renderImage()
+                    .writeToImage();
+            ;
+        }
+    }
 
 
-        ImageWriter imageWriter = new ImageWriter("beautiful_picture_scene", 1000, 1000);
+    @Test
+    public void test_image() {
+        Camera camera = new Camera(
+                new Point(0, 0, 800), new Vector(0, 0, -1), new Vector(0, 1, 0))
+                .setViewPlaneSize(1000, 1000)
+                .setViewPlaneDistance(800);
+
+        Scene scene = this.beautifulPictureScene("TestImage");
+
+
+        double angle = 360d /10;
+        double angleRadians = 2 * Math.PI/10 ;
+
+        double radius = camera.getP0().subtract(Point.ZERO).length();
+
+
+        camera.rotate(0, angle, 0);
+        camera.setP0(
+                Math.sin(angleRadians * (2)) * radius,
+                0,
+                Math.cos(angleRadians * (2)) * radius);
+
+        camera.setImageWriter(new ImageWriter("TestImage", 1000, 1000))
+                .setRayTracer(new RayTracerBasic(scene))
+                .renderImage()
+                .writeToImage();
+        ;
+    }
+
+
+    @Test
+    public void test_image_AA() {
+        Camera camera = new Camera(
+                new Point(0, 0, 800), new Vector(0, 0, -1), new Vector(0, 1, 0))
+                .setViewPlaneSize(1000, 1000)
+                .setViewPlaneDistance(1000)
+                .useAntiAliasing(true)
+                .setNumOfAARays(10)
+                .setMultithreading(0);
+
+        Scene scene = this.beautifulPictureScene("test_AA");
+
+        ImageWriter imageWriter = new ImageWriter("testAA", 1000, 1000);
         camera.setImageWriter(imageWriter)
                 .setRayTracer(new RayTracerBasic(scene))
                 .renderImage();
         camera.writeToImage();
     }
 
+    @Test
+    public void test_image_SS() {
+        Camera camera = (new Camera(new Point(0.0D, 60.0D, 1000.0D),
+                new Vector(0.0D, 0.0D, -1.0D), new Vector(0.0D, 1.0D, 0.0D)))
+                .setViewPlaneSize(200, 200)
+                .setViewPlaneDistance(200);//.setMultithreading(0);
+
+        Scene scene = this.beautifulPictureScene("test_SS");
+
+        camera.setImageWriter(new ImageWriter("TestSS", 600, 600))
+                .setRayTracer((new RayTracerBasic(scene))
+                        .useSoftShadow(true).setNumOfSSRays(100).setRadiusBeamSS(50.0D))
+                .renderImage()
+                .writeToImage();
+    }
 
     @Test
-    public void initial_image_7() {
-        Camera camera = new Camera(new Point(0, -2000, 500), new Vector(0, 1, 0), new Vector(0, 0, 1))
-                .setViewPlaneSize(700, 700).setViewPlaneDistance(650);
+    public void test_Glossy() {
+        Camera camera = (new Camera(new Point(0.0D, 60.0D, 1000.0D),
+                new Vector(0.0D, 0.0D, -1.0D), new Vector(0.0D, 1.0D, 0.0D))).
+                setViewPlaneSize(200, 200)
+                .setViewPlaneDistance(250.0D).setMultithreading(4);
 
-        Scene scene = new Scene("room");
+        Scene scene = this.beautifulPictureScene("test_G");
+
+        camera.setImageWriter(new ImageWriter("TestGlossy", 700, 700))
+                .setRayTracer((new RayTracerBasic(scene))
+                        .useGlossiness(true).setNumOfGlossinessRays(100))
+                .renderImage()
+                .writeToImage();
+    }
+
+
+    @Test
+    public void PR08() {
+        Camera camera = new Camera(new Point(0, -2000, 500),
+                new Vector(0, 1, 0), new Vector(0, 0, 1))
+                .setViewPlaneSize(200, 200)
+                .setViewPlaneDistance(100)
+                .useAntiAliasing(true) //set AA
+                .setNumOfAARays(10);
+
+        Scene scene = this.beautifulPictureScene("test_PR08");
+
+        camera.setImageWriter(new ImageWriter("PR08", 500, 500))
+                .setRayTracer(new RayTracerBasic(scene)
+                        .useSoftShadow(true).setNumOfSSRays(10).setRadiusBeamSS(10) //use soft shadow
+                        .useGlossiness(true).setNumOfGlossinessRays(10)) //use glossiness
+                .renderImage()
+                .writeToImage();
+    }
+
+    @Test
+    public void PR081() {
+        Camera camera = new Camera(new Point(0, -2000, 500),
+                new Vector(0, 1, 0), new Vector(0, 0, 1))
+                .setViewPlaneSize(700, 700).setViewPlaneDistance(650)
+                .useAntiAliasing(true) //set AA
+                .setNumOfAARays(10);
+
+        Scene scene = this.initial_image_7("test_PR08");
+
+        camera.setImageWriter(new ImageWriter("PR08", 500, 500))
+                .setRayTracer(new RayTracerBasic(scene)
+                        .useSoftShadow(true).setNumOfSSRays(10).setRadiusBeamSS(10) //use soft shadow
+                        .useGlossiness(true).setNumOfGlossinessRays(10)) //use glossiness
+                .renderImage()
+                .writeToImage();
+
+
+    }
+
+
+    @Test
+    public Scene initial_image_7(String name) {
+
+
+        Scene scene = new Scene(name);
 
         scene.geometries.add(
                 //left wall
@@ -268,23 +481,22 @@ public class picturesTest {
                         .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)),
 
                 //spheres
-                new Sphere(230, new Point(-55, -650, 250))
+                new Sphere(150, new Point(-295, -550, 250))
                         .setEmission(new Color(black)) //
-                        .setMaterial(new Material().setKd(0.8).setKs(0.8).setShininess(30).setKr(0.8))
-
+                        .setMaterial(new Material().setKd(0.8).setKs(0.8).setShininess(30).setKr(0.8).setKg(0.8)),
+                new Sphere(180, new Point(200, -850, 255))
+                        .setEmission(new Color(black)) //
+                        .setMaterial(new Material().setKd(0.8).setKs(0.8).setShininess(30).setKt(0.8).setKg(0.8))
 
 
         );
 
         scene.lights.add(new PointLight(new Color(white), new Point(0, -650, 1053)).setKl(0.00001).setKq(0.000002));
+        scene.lights.add(new PointLight(new Color(white), new Point(200, -650, 1053)).setKl(0.00001).setKq(0.000002));
 
-
-        ImageWriter imageWriter = new ImageWriter("room", 1000, 1000);
-        camera.setImageWriter(imageWriter) //
-                .setRayTracer(new RayTracerBasic(scene)) //
-                .renderImage(); //
-        camera.writeToImage();
+        return scene;
     }
+
 
 }
 

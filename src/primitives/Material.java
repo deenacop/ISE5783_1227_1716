@@ -20,6 +20,11 @@ public class Material {
     public Double3 kR = Double3.ZERO;
 
     /**
+     * Field represents glossiness attenuation factor
+     */
+    public double kG = 1;
+
+    /**
      * Builder patterns setter for field kD
      * @param kD parameter for kD
      * @return Material object
@@ -110,6 +115,17 @@ public class Material {
      */
     public Material setKt(double value) {
         this.kT = new Double3(value);
+        return this;
+    }
+
+    /**
+     * Builder patterns setter for field kG
+     *
+     * @param value parameter for kG constructor
+     * @return Material object
+     */
+    public Material setKg(double value) {
+        this.kG = value;
         return this;
     }
 }

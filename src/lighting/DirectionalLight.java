@@ -4,6 +4,8 @@ import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 
+import java.util.List;
+
 /**
  * Class represents directional light in a scene
  * Extends abstract class Light and implements interface LightSource
@@ -37,5 +39,10 @@ public class DirectionalLight extends Light implements LightSource {
     @Override
     public double getDistance(Point point) {
         return Double.POSITIVE_INFINITY;
+    }
+
+    @Override
+    public List<Vector> getLCircle(Point p, double r, int amount) {
+        return List.of(getL(p));
     }
 }
