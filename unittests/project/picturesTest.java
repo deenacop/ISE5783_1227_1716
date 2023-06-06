@@ -317,6 +317,7 @@ public class picturesTest {
                 .setViewPlaneSize(1000, 1000)
                 .setViewPlaneDistance(800);
 
+
         Scene scene = this.beautifulPictureScene("TestImage");
 
 
