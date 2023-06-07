@@ -236,24 +236,24 @@ public class picturesTest {
                 .setMaterial(new Material().setKd(0.8).setKs(0.8).setShininess(30));
         scene.geometries.add(path);
 
-//        // Create stone spheres along the sides of the path
-//        for (int i = 0; i < numStones; i++) {
-//            double t = (double) i / (numStones - 1); // Parameter to interpolate between path points
-//
-//            double x = -pathWidth / 2 + (t * pathWidth);
-//            double z = -pathLength / 2 + (Math.random() * pathLength);
-//
-//            // Add stones only on the sides of the path
-//            if (x <= -pathWidth / 2 + stoneRadius || x >= pathWidth / 2 - stoneRadius) {
-//                Geometry stone = new Sphere(stoneRadius, new Point(x, -199 + stoneRadius, z))
-//                        .setEmission(new Color(105, 105, 105)) // Dark gray stone
-//                        .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(100));
-//                scene.geometries.add(stone);
-//            }
-//        }
+        // Create stone spheres along the sides of the path
+        for (int i = 0; i < numStones; i++) {
+            double t = (double) i / (numStones - 1); // Parameter to interpolate between path points
+
+            double x = -pathWidth / 2 + (t * pathWidth);
+            double z = -pathLength / 2 + (Math.random() * pathLength);
+
+            // Add stones only on the sides of the path
+            if (x <= -pathWidth / 2 + stoneRadius || x >= pathWidth / 2 - stoneRadius) {
+                Geometry stone = new Sphere(stoneRadius, new Point(x, -199 + stoneRadius, z))
+                        .setEmission(new Color(105, 105, 105)) // Dark gray stone
+                        .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(100));
+                scene.geometries.add(stone);
+            }
+        }
 
         // Tree trunk
-        Geometry trunk = new Cylinder(new Ray(new Point(800, -200, -1000), new Vector(0, 1, 0)),
+        Geometry trunk = new Cylinder(new Ray(new Point(500, -200, -600), new Vector(0, 1, 0)),
                 300, 40)
                 .setEmission(new Color(139, 69, 19)) // Brown trunk
                 .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(100));
@@ -343,17 +343,30 @@ public class picturesTest {
 
     @Test
     public void test_image_AA() {
-        Camera camera = new Camera(
-                new Point(0, 0, 800), new Vector(0, 0, -1), new Vector(0, 1, 0))
+        Camera camera = (new Camera(new Point(300, 0, 800),
+                new Vector(0.0D, 0.0D, -1.0D), new Vector(0.0D, 1.0D, 0.0D)))
                 .setViewPlaneSize(1000, 1000)
-                .setViewPlaneDistance(1000)
-                .useAntiAliasing(true)
-                .setNumOfAARays(10)
-                .setMultithreading(0);
+                .setViewPlaneDistance(800)
+                .useAntiAliasing(true) //set AA
+                .setNumOfAARays(70)
+                .useAdaptive(true) //use adaptive
+                .setMultithreading(5); //use multithreading
 
         Scene scene = this.beautifulPictureScene("test_AA");
 
-        ImageWriter imageWriter = new ImageWriter("testAA", 1000, 1000);
+        double angle = 360d /10;
+        double angleRadians = 2 * Math.PI/10 ;
+
+        double radius = camera.getP0().subtract(Point.ZERO).length();
+
+
+        camera.rotate(0, angle, 0);
+        camera.setP0(
+                Math.sin(angleRadians * (2)) * radius,
+                0,
+                Math.cos(angleRadians * (2)) * radius);
+
+        ImageWriter imageWriter = new ImageWriter("testAAFinal", 600, 600);
         camera.setImageWriter(imageWriter)
                 .setRayTracer(new RayTracerBasic(scene))
                 .renderImage();
@@ -362,12 +375,24 @@ public class picturesTest {
 
     @Test
     public void test_image_SS() {
-        Camera camera = (new Camera(new Point(0.0D, 60.0D, 1000.0D),
+        Camera camera = (new Camera(new Point(0, 0, 800),
                 new Vector(0.0D, 0.0D, -1.0D), new Vector(0.0D, 1.0D, 0.0D)))
-                .setViewPlaneSize(200, 200)
-                .setViewPlaneDistance(200);//.setMultithreading(0);
+                .setViewPlaneSize(1000, 1000)
+                .setViewPlaneDistance(150);//.setMultithreading(0);
 
         Scene scene = this.beautifulPictureScene("test_SS");
+
+        double angle = 360d /10;
+        double angleRadians = 2 * Math.PI/10 ;
+
+        double radius = camera.getP0().subtract(Point.ZERO).length();
+
+
+        camera.rotate(0, angle, 0);
+        camera.setP0(
+                Math.sin(angleRadians * (2)) * radius,
+                0,
+                Math.cos(angleRadians * (2)) * radius);
 
         camera.setImageWriter(new ImageWriter("TestSS", 600, 600))
                 .setRayTracer((new RayTracerBasic(scene))
@@ -378,14 +403,26 @@ public class picturesTest {
 
     @Test
     public void test_Glossy() {
-        Camera camera = (new Camera(new Point(0.0D, 60.0D, 1000.0D),
+        Camera camera = (new Camera(new Point(0.0D, 0.0D, 700.0D),
                 new Vector(0.0D, 0.0D, -1.0D), new Vector(0.0D, 1.0D, 0.0D))).
-                setViewPlaneSize(200, 200)
-                .setViewPlaneDistance(250.0D).setMultithreading(4);
+                setViewPlaneSize(1000, 1000)
+                .setViewPlaneDistance(700.0D).setMultithreading(4);
 
         Scene scene = this.beautifulPictureScene("test_G");
 
-        camera.setImageWriter(new ImageWriter("TestGlossy", 700, 700))
+        double angle = 360d /10;
+        double angleRadians = 2 * Math.PI/10 ;
+
+        double radius = camera.getP0().subtract(Point.ZERO).length();
+
+
+        camera.rotate(0, angle, 0);
+        camera.setP0(
+                Math.sin(angleRadians * (2)) * radius,
+                0,
+                Math.cos(angleRadians * (2)) * radius);
+
+        camera.setImageWriter(new ImageWriter("TestGlossyFinal", 700, 700))
                 .setRayTracer((new RayTracerBasic(scene))
                         .useGlossiness(true).setNumOfGlossinessRays(100))
                 .renderImage()
@@ -393,21 +430,67 @@ public class picturesTest {
     }
 
 
+//    @Test
+//    public void PR08() {
+//        Camera camera = new Camera(new Point(0, -2000, 500),
+//                new Vector(0, 1, 0), new Vector(0, 0, 1))
+//                .setViewPlaneSize(200, 200)
+//                .setViewPlaneDistance(100)
+//                .useAntiAliasing(true) //set AA
+//                .setNumOfAARays(10)
+//                .setMultithreading(5);
+//
+//        Scene scene = this.beautifulPictureScene("test_PR08");
+//
+//        double angle = 360d / 10;
+//        double angleRadians = 2 * Math.PI / 10;
+//
+//        double radius = camera.getP0().subtract(Point.ZERO).length();
+//
+//
+//        camera.rotate(0, angle, 0);
+//        camera.setP0(
+//                Math.sin(angleRadians * (2)) * radius,
+//                0,
+//                Math.cos(angleRadians * (2)) * radius);
+//
+//        camera.setImageWriter(new ImageWriter("PR08", 500, 500))
+//                .setRayTracer(new RayTracerBasic(scene)
+//                        .useSoftShadow(true).setNumOfSSRays(10).setRadiusBeamSS(10) //use soft shadow
+//                        .useGlossiness(true).setNumOfGlossinessRays(10)) //use glossiness
+//                .renderImage()
+//                .writeToImage();
+//    }
+
     @Test
-    public void PR08() {
-        Camera camera = new Camera(new Point(0, -2000, 500),
-                new Vector(0, 1, 0), new Vector(0, 0, 1))
-                .setViewPlaneSize(200, 200)
-                .setViewPlaneDistance(100)
+    public void PR09() {
+        Camera camera = (new Camera(new Point(300, 0, 800),
+                new Vector(0.0D, 0.0D, -1.0D), new Vector(0.0D, 1.0D, 0.0D)))
+                .setViewPlaneSize(1000, 1000)
+                .setViewPlaneDistance(800)
                 .useAntiAliasing(true) //set AA
-                .setNumOfAARays(10);
+                .setNumOfAARays(70)
+                .useAdaptive(true) //use adaptive
+                .setMultithreading(5); //use multithreading
 
-        Scene scene = this.beautifulPictureScene("test_PR08");
+        Scene scene = this.beautifulPictureScene("final");
 
-        camera.setImageWriter(new ImageWriter("PR08", 500, 500))
+        double angle = 360d /10;
+        double angleRadians = 2 * Math.PI/10 ;
+
+        double radius = camera.getP0().subtract(Point.ZERO).length();
+
+
+        camera.rotate(0, angle, 0);
+        camera.setP0(
+                Math.sin(angleRadians * (2)) * radius,
+                0,
+                Math.cos(angleRadians * (2)) * radius);
+
+        camera.setImageWriter(new ImageWriter("final", 600, 600))
                 .setRayTracer(new RayTracerBasic(scene)
-                        .useSoftShadow(true).setNumOfSSRays(10).setRadiusBeamSS(10) //use soft shadow
-                        .useGlossiness(true).setNumOfGlossinessRays(10)) //use glossiness
+                        .useSoftShadow(true).setNumOfSSRays(100).setRadiusBeamSS(50.0D) //use soft shadow
+                        .useGlossiness(true).setNumOfGlossinessRays(100)) //use glossiness
                 .renderImage()
                 .writeToImage();
     }
@@ -416,16 +499,32 @@ public class picturesTest {
     public void PR081() {
         Camera camera = new Camera(new Point(0, -2000, 500),
                 new Vector(0, 1, 0), new Vector(0, 0, 1))
-                .setViewPlaneSize(700, 700).setViewPlaneDistance(650)
-                .useAntiAliasing(true) //set AA
-                .setNumOfAARays(10);
+                .setViewPlaneSize(700, 700).setViewPlaneDistance(650);
 
         Scene scene = this.initial_image_7("test_PR08");
 
-        camera.setImageWriter(new ImageWriter("PR08", 500, 500))
+        camera.setImageWriter(new ImageWriter("PR08", 600, 600))
+                .setRayTracer(new RayTracerBasic(scene))
+                .renderImage()
+                .writeToImage();
+
+
+    }
+
+    @Test
+    public void PR08image() {
+        Camera camera = new Camera(new Point(0, -2000, 500),
+                new Vector(0, 1, 0), new Vector(0, 0, 1))
+                .setViewPlaneSize(200, 200).setViewPlaneDistance(200)
+                .setNumOfAARays(30)
+                .setMultithreading(5);
+
+        Scene scene = this.initial_image_7("test_PR08");
+
+        camera.setImageWriter(new ImageWriter("PR08image", 600, 600))
                 .setRayTracer(new RayTracerBasic(scene)
-                        .useSoftShadow(true).setNumOfSSRays(10).setRadiusBeamSS(10) //use soft shadow
-                        .useGlossiness(true).setNumOfGlossinessRays(10)) //use glossiness
+                .useSoftShadow(true).setNumOfSSRays(30).setRadiusBeamSS(30) //use soft shadow
+                .useGlossiness(true).setNumOfGlossinessRays(30)) //use glossiness
                 .renderImage()
                 .writeToImage();
 

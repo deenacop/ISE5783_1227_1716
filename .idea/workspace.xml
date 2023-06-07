@@ -4,17 +4,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57f24473-b75d-4609-8a6d-ff3a6fd71fa2" name="Changes" comment="view">
+    <list default="true" id="57f24473-b75d-4609-8a6d-ff3a6fd71fa2" name="Changes" comment="house picture">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/DirectionalLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/DirectionalLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/LightSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/LightSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/PointLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/PointLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Color.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Material.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Vector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/TestGlossy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/TestImage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/TestSS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/base render test.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/beautiful_picture_scene.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/color render test.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/earth_picture_scene.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/lightSphereDirectional.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/lightSpherePoint.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/lightSphereSpot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/lightTrianglesDirectional.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/lightTrianglesPoint.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/lightTrianglesSpot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/mini 1/PR08.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/mini 1/PR08.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/moveTest1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/moveTest10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/moveTest2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/moveTest3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/moveTest4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/moveTest6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/moveTest7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/moveTest8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/moveTest9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/reflectionTwoSpheresMirrored.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/refractionShadow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/refractionTwoSpheres.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleInitial.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleMove1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleMove2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleSpot1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleSpot2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/shadowTrianglesSphere.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/sphereMultiLights.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/testAA.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/testbyello.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/trianglesDirectional.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/trianglesMultiLights.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/unittests/project/picturesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/project/picturesTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,23 +115,7 @@
       <recent name="geometries" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.picturesTest.test_image">
-    <configuration name="picturesTest.PR08" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5783_1227_1716" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="project.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="project" />
-      <option name="MAIN_CLASS_NAME" value="project.picturesTest" />
-      <option name="METHOD_NAME" value="PR08" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.picturesTest.test_image_AA">
     <configuration name="picturesTest.PR081" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1227_1716" />
       <extension name="coverage">
@@ -115,6 +127,22 @@
       <option name="PACKAGE_NAME" value="project" />
       <option name="MAIN_CLASS_NAME" value="project.picturesTest" />
       <option name="METHOD_NAME" value="PR081" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="picturesTest.PR09" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5783_1227_1716" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="project.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="project" />
+      <option name="MAIN_CLASS_NAME" value="project.picturesTest" />
+      <option name="METHOD_NAME" value="PR09" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -136,7 +164,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="picturesTest.test_image" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="picturesTest.test_image_AA" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1227_1716" />
       <extension name="coverage">
         <pattern>
@@ -146,7 +174,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="project" />
       <option name="MAIN_CLASS_NAME" value="project.picturesTest" />
-      <option name="METHOD_NAME" value="test_image" />
+      <option name="METHOD_NAME" value="test_image_AA" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -170,11 +198,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.picturesTest.test_image" />
-        <item itemvalue="JUnit.picturesTest.PR081" />
+        <item itemvalue="JUnit.picturesTest.test_image_AA" />
         <item itemvalue="JUnit.picturesTest.test_Glossy" />
-        <item itemvalue="JUnit.picturesTest.PR08" />
+        <item itemvalue="JUnit.picturesTest.PR09" />
         <item itemvalue="JUnit.picturesTest.test_image_SS" />
+        <item itemvalue="JUnit.picturesTest.PR081" />
       </list>
     </recent_temporary>
   </component>
@@ -229,7 +257,9 @@
       <workItem from="1685624492620" duration="13360000" />
       <workItem from="1685689580217" duration="5504000" />
       <workItem from="1685862632015" duration="950000" />
-      <workItem from="1685986351150" duration="11594000" />
+      <workItem from="1685986351150" duration="26454000" />
+      <workItem from="1686132512895" duration="8622000" />
+      <workItem from="1686155088889" duration="6446000" />
     </task>
     <task id="LOCAL‎-00001" summary="finish vector">
       <created>1678098771109</created>
@@ -315,7 +345,28 @@
       <option name="project" value="LOCAL‎" />
       <updated>1685443755137</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL‎-00013" summary="house picture">
+      <created>1686045959165</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL‎-00013" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686045959165</updated>
+    </task>
+    <task id="LOCAL‎-00014" summary="house picture">
+      <created>1686046159537</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL‎-00014" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686046159537</updated>
+    </task>
+    <task id="LOCAL‎-00015" summary="house picture">
+      <created>1686046477418</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL‎-00015" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686046477418</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,7 +386,8 @@
     <MESSAGE value="color and spotlight" />
     <MESSAGE value="pictures" />
     <MESSAGE value="view" />
-    <option name="LAST_COMMIT_MESSAGE" value="view" />
+    <MESSAGE value="house picture" />
+    <option name="LAST_COMMIT_MESSAGE" value="house picture" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
