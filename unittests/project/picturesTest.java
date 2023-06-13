@@ -412,9 +412,7 @@ public class picturesTest {
 
         double angle = 360d /10;
         double angleRadians = 2 * Math.PI/10 ;
-
         double radius = camera.getP0().subtract(Point.ZERO).length();
-
 
         camera.rotate(0, angle, 0);
         camera.setP0(
