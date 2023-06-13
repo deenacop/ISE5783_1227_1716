@@ -428,40 +428,7 @@ public class picturesTest {
                 .renderImage()
                 .writeToImage();
     }
-
-
-//    @Test
-//    public void PR08() {
-//        Camera camera = new Camera(new Point(0, -2000, 500),
-//                new Vector(0, 1, 0), new Vector(0, 0, 1))
-//                .setViewPlaneSize(200, 200)
-//                .setViewPlaneDistance(100)
-//                .useAntiAliasing(true) //set AA
-//                .setNumOfAARays(10)
-//                .setMultithreading(5);
-//
-//        Scene scene = this.beautifulPictureScene("test_PR08");
-//
-//        double angle = 360d / 10;
-//        double angleRadians = 2 * Math.PI / 10;
-//
-//        double radius = camera.getP0().subtract(Point.ZERO).length();
-//
-//
-//        camera.rotate(0, angle, 0);
-//        camera.setP0(
-//                Math.sin(angleRadians * (2)) * radius,
-//                0,
-//                Math.cos(angleRadians * (2)) * radius);
-//
-//        camera.setImageWriter(new ImageWriter("PR08", 500, 500))
-//                .setRayTracer(new RayTracerBasic(scene)
-//                        .useSoftShadow(true).setNumOfSSRays(10).setRadiusBeamSS(10) //use soft shadow
-//                        .useGlossiness(true).setNumOfGlossinessRays(10)) //use glossiness
-//                .renderImage()
-//                .writeToImage();
-//    }
-
+    
     @Test
     public void PR09() {
         Camera camera = (new Camera(new Point(300, 0, 800),
