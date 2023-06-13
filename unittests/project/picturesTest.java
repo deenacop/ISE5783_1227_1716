@@ -190,7 +190,6 @@ public class picturesTest {
                 .setEmission(new Color(128, 0, 0)) // Gray roof
                 .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(300)));
 
-
         // Fence
         int fenceHeight = 160;
         int fenceWidth = 20;
@@ -218,7 +217,6 @@ public class picturesTest {
                     .setMaterial(new Material().setKd(0.6).setKs(0.4).setShininess(100));
             scene.geometries.add(rail2);
         }
-
 
         // Path
         int pathWidth = 200;
@@ -273,8 +271,6 @@ public class picturesTest {
                     .setMaterial(new Material().setKd(0).setKs(0).setShininess(300));
             scene.geometries.add(leaf);
         }
-
-
         return scene;
     }
 
@@ -305,10 +301,8 @@ public class picturesTest {
                     .setRayTracer(new RayTracerBasic(scene))
                     .renderImage()
                     .writeToImage();
-            ;
         }
     }
-
 
     @Test
     public void test_image() {
@@ -317,15 +311,11 @@ public class picturesTest {
                 .setViewPlaneSize(1000, 1000)
                 .setViewPlaneDistance(800);
 
-
         Scene scene = this.beautifulPictureScene("TestImage");
-
 
         double angle = 360d /10;
         double angleRadians = 2 * Math.PI/10 ;
-
         double radius = camera.getP0().subtract(Point.ZERO).length();
-
 
         camera.rotate(0, angle, 0);
         camera.setP0(
@@ -337,9 +327,7 @@ public class picturesTest {
                 .setRayTracer(new RayTracerBasic(scene))
                 .renderImage()
                 .writeToImage();
-        ;
     }
-
 
     @Test
     public void test_image_AA() {
@@ -442,9 +430,7 @@ public class picturesTest {
 
         double angle = 360d /10;
         double angleRadians = 2 * Math.PI/10 ;
-
         double radius = camera.getP0().subtract(Point.ZERO).length();
-
 
         camera.rotate(0, angle, 0);
         camera.setP0(
@@ -472,8 +458,6 @@ public class picturesTest {
                 .setRayTracer(new RayTracerBasic(scene))
                 .renderImage()
                 .writeToImage();
-
-
     }
 
     @Test
@@ -492,14 +476,11 @@ public class picturesTest {
                 .useGlossiness(true).setNumOfGlossinessRays(30)) //use glossiness
                 .renderImage()
                 .writeToImage();
-
-
     }
 
 
     @Test
     public Scene initial_image_7(String name) {
-
 
         Scene scene = new Scene(name);
 
@@ -552,8 +533,6 @@ public class picturesTest {
                 new Sphere(180, new Point(200, -850, 255))
                         .setEmission(new Color(black)) //
                         .setMaterial(new Material().setKd(0.8).setKs(0.8).setShininess(30).setKt(0.8).setKg(0.8))
-
-
         );
 
         scene.lights.add(new PointLight(new Color(white), new Point(0, -650, 1053)).setKl(0.00001).setKq(0.000002));
@@ -561,7 +540,5 @@ public class picturesTest {
 
         return scene;
     }
-
-
 }
 
